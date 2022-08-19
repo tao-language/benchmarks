@@ -1,8 +1,5 @@
 # VS Code
 .vscode/
 
-# Haskell
-.stack-work/
-*.cabal
-*~
-stack.yaml.lock
+# Python
+env/
