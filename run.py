@@ -1,80 +1,45 @@
+import json
 import os
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import subprocess
-from measure import Resources
-from typing import Optional, List
-
-
-@dataclass
-class Stat:
-    min: float
-    max: float
-    avg: float
-
-    @staticmethod
-    def compute(xs: List[float]):
-        return Stat(min=min(xs), max=max(xs), avg=sum(xs) / len(xs))
-
-
-@dataclass
-class Result:
-    compile_time: float
-    compile_memory: float
-    run_time: Stat
-    run_memory: Stat
-
-    @staticmethod
-    def compute(runs: List[Resources], compile_res: Optional[Resources] = None):
-        return Result(
-            compile_time=compile_res.time if compile_res else None,
-            compile_memory=compile_res.memory if compile_res else None,
-            run_time=Stat.compute([run.time for run in runs]),
-            run_memory=Stat.compute([run.memory for run in runs]),
-        )
-
-
-def measure(cmd: str, source: str, args: List[str]) -> Resources:
-    try:
-        p = subprocess.run(
-            ["python", "measure.py", cmd, source, *args],
-            capture_output=True,
-            check=True,
-        )
-        return Resources.from_json(p.stdout.decode("utf-8"))
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(e.stderr.decode("utf-8"))
+from typing import Dict, Optional, List
 
 
 @dataclass
 class Benchmark:
-    cmd: str
-    source: str
-    args: List[str]
-    compile_cmd: str = ""
-    compile_args: List[str] = field(default_factory=list)
-    program: str = ""
+    run: List[str]
+    compile: Optional[List[str]] = None
 
-    def run(self, repeats: int) -> Result:
-        if self.compile_cmd:
-            compile_res = measure(self.compile_cmd, self.source, self.compile_args)
-        else:
-            self.program = self.source
-            compile_res = None
 
-        runs = [measure(self.cmd, self.program, self.args) for _ in range(repeats)]
-        return Result.compute(runs, compile_res)
+@dataclass
+class Stats:
+    min: float
+    max: float
+    avg: float
+
+
+@dataclass
+class Results:
+    compile_time: float
+    compile_memory: float
+    run_time: Stats
+    run_memory: Stats
 
 
 def python(source: str, args: List[str] = []) -> Benchmark:
-    return Benchmark("python", source, args)
+    return Benchmark(["python", source, *args])
 
 
 def ruby(source: str, args: List[str] = []) -> Benchmark:
-    return Benchmark("ruby", source, args)
+    return Benchmark(["ruby", source, *args])
 
 
 def java(source: str, args: List[str] = []) -> Benchmark:
-    return Benchmark(cmd="java", source=source, args=args, compile_cmd="javac")
+    (mainClass, _) = os.path.splitext(source)
+    return Benchmark(
+        compile=["javac", source],
+        run=["java", mainClass],
+    )
 
 
 benchmarks = [
@@ -84,11 +49,33 @@ benchmarks = [
 ]
 
 
-def run(repeats: int, directory: str = "src"):
-    os.chdir(directory)
+def get_stats(xs: List[float]) -> Stats:
+    return Stats(min=min(xs), max=max(xs), avg=sum(xs) / len(xs))
+
+
+def measure(cmd: List[str]) -> Dict[str, float]:
+    try:
+        p = subprocess.run(
+            ["python", "measure.py", "--dir=src/", *cmd],
+            capture_output=True,
+            check=True,
+        )
+        return json.loads(p.stdout.decode("utf-8"))
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(e.stderr.decode("utf-8"))
+
+
+def run(repeats: int):
     for benchmark in benchmarks:
-        result = benchmark.run(repeats)
-        print(result)
+        compile_results = measure(benchmark.compile) if benchmark.compile else {}
+        runs_results = [measure(benchmark.run) for _ in range(repeats)]
+        results = Results(
+            compile_time=compile_results.get("time"),
+            compile_memory=compile_results.get("memory"),
+            run_time=get_stats([run["time"] for run in runs_results]),
+            run_memory=get_stats([run["memory"] for run in runs_results]),
+        )
+        print(results)
 
 
 if __name__ == "__main__":
