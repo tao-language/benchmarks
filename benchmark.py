@@ -72,12 +72,12 @@ class Benchmark:
             )
             stats = json.loads(p.stdout.decode("utf-8"))
             return Result(
-                self.name,
-                lang_name,
-                phase,
-                stats["time"],
-                stats["memory"],
-                stats["stdout"],
+                name=" ".join([self.name, *self.args]),
+                language=lang_name,
+                phase=phase,
+                time=stats["time"],
+                memory=stats["memory"],
+                output=stats["stdout"],
             )
         except subprocess.CalledProcessError as e:
             print(e.stderr.decode("utf-8"), file=sys.stderr)

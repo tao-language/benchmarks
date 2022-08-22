@@ -7,17 +7,18 @@ import benchmark as bm
 benchmarks = [
     bm.Benchmark("hello-world", ["Hi! 🎉"], result="Hi! 🎉"),
     bm.Benchmark("fibonacci", ["20"], result="6765"),
+    bm.Benchmark("fibonacci", ["30"], result="832040"),
 ]
 
 
 def print_table(results: Iterable[bm.Result]):
     for i, result in enumerate(results):
         if i == 0:
-            column_names = [f"{name:10}" for name in result.__dict__.keys()]
+            column_names = [f"{name:20}" for name in result.__dict__.keys()]
             print("\t".join(column_names))
 
         row = [
-            f"{value:10.4f}" if type(value) == float else f"{value:10}"
+            f"{f'{value:.4f}':20}" if type(value) == float else f"{str(value):20}"
             for value in result.__dict__.values()
         ]
         print("\t".join(row))
