@@ -2,6 +2,7 @@ import benchmark as bm
 
 
 benchmarks = [
+    bm.c("hello-world.c"),
     bm.haskell("hello-world.hs"),
     bm.java("HelloWorld.java"),
     bm.python("hello-world.py"),

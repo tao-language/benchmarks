@@ -28,10 +28,18 @@ class Results:
     run_memory: Stats
 
 
+def c(source: str, args: List[str] = [], compiler: str = "gcc") -> Benchmark:
+    return Benchmark(
+        compile=[compiler, "-O3", source],
+        run=["./a.out", *args],
+        cleanup=["a.out"],
+    )
+
+
 def haskell(source: str, args: List[str] = []) -> Benchmark:
     (name, _) = os.path.splitext(source)
     return Benchmark(
-        compile=["ghc", source],
+        compile=["ghc", source, "-O3"],
         run=["./" + name, *args],
         cleanup=[name, name + ".hi", name + ".o"],
     )
