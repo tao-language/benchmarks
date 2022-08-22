@@ -11,8 +11,8 @@ class Result:
     name: str
     language: str
     phase: str
-    time: float
-    memory: float
+    time_sec: float
+    memory_mb: float
     output: str
 
 
@@ -75,8 +75,8 @@ class Benchmark:
                 name=" ".join([self.name, *self.args]),
                 language=lang_name,
                 phase=phase,
-                time=stats["time"],
-                memory=stats["memory"],
+                time_sec=stats["time"],
+                memory_mb=stats["memory"] / 1024.0 / 1024.0,
                 output=stats["stdout"],
             )
         except subprocess.CalledProcessError as e:

@@ -5,7 +5,7 @@ import benchmark as bm
 
 
 benchmarks = [
-    bm.Benchmark("hello-world", ["Hi! 🎉"], result="Hi! 🎉"),
+    bm.Benchmark("hello-world", ["Hi! 😊"], result="Hi! 😊"),
     bm.Benchmark("fibonacci", ["20"], result="6765"),
     bm.Benchmark("fibonacci", ["30"], result="832040"),
 ]
