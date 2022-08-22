@@ -19,6 +19,7 @@ class Result:
 @dataclass
 class Language:
     name: str
+    source: str
     run: List[str]
     compile: Optional[List[str]] = None
     cleanup: List[str] = field(default_factory=list)
@@ -36,30 +37,34 @@ class Benchmark:
         return [
             Language(
                 name="C",
+                source="main.c",
                 compile=["gcc", "-O3", "main.c"],
                 run=["./a.out", *self.args],
                 cleanup=["a.out"],
             ),
             Language(
                 name="Go",
+                source="main.go",
                 compile=["go", "build", "main.go"],
                 run=["./main", *self.args],
                 cleanup=["main"],
             ),
             Language(
                 name="Haskell",
-                compile=["ghc", "main.hs", "-O3"],
+                source="main.hs",
+                compile=["ghc", "-O3", "main.hs"],
                 run=["./main", *self.args],
                 cleanup=["main", "main.hi", "main.o"],
             ),
             Language(
                 name="Java",
+                source="Main.java",
                 compile=["javac", "Main.java"],
                 run=["java", "Main", *self.args],
                 cleanup=["Main.class"],
             ),
-            Language("Python", ["python", "main.py", *self.args]),
-            Language("Ruby", ["ruby", "main.rb", *self.args]),
+            Language("Python", "main.py", ["python", "main.py", *self.args]),
+            Language("Ruby", "main.rb", ["ruby", "main.rb", *self.args]),
         ]
 
     def measure(self, phase: str, lang_name: str, cmd: List[str]) -> Optional[Result]:
@@ -80,12 +85,19 @@ class Benchmark:
                 output=stats["stdout"],
             )
         except subprocess.CalledProcessError as e:
-            print(e.stderr.decode("utf-8"), file=sys.stderr)
-            return None
+            raise RuntimeError(e.stderr.decode("utf-8"))
 
     def run(self) -> Iterable[Result]:
         for lang in self.languages():
             if lang.name in self.skip:
+                continue
+
+            source = os.path.join("src", self.name, lang.source)
+            if not os.path.exists(source):
+                print(
+                    f"⚠️ [Skipping {self.name} in {lang.name}] File not found: {source}",
+                    file=sys.stderr,
+                )
                 continue
 
             if lang.compile:
