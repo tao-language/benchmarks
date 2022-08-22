@@ -1,120 +1,106 @@
+from enum import Enum
 import subprocess
 from dataclasses import dataclass, field, fields
 import json
 import os
-from typing import Dict, List, Optional
-
-
-@dataclass
-class Benchmark:
-    name: str
-    run: List[str]
-    compile: Optional[List[str]] = None
-    cleanup: List[str] = field(default_factory=list)
-
-
-@dataclass
-class Stats:
-    min: float
-    max: float
-    avg: float
+from typing import Dict, Iterable, List, Optional, Tuple
 
 
 @dataclass
 class Result:
     name: str
-    compile_time: float
-    compile_memory: float
-    # TODO: compiled file size
-    run_time: Stats
-    run_memory: Stats
-
-    def to_dict(self) -> Dict[str, float]:
-        return {
-            "compile_time": self.compile_time,
-            "compile_memory": self.compile_memory,
-            "run_time.min": self.run_time.min,
-            "run_time.max": self.run_time.max,
-            "run_time.avg": self.run_time.avg,
-            "run_memory.min": self.run_memory.min,
-            "run_memory.max": self.run_memory.max,
-            "run_memory.avg": self.run_memory.avg,
-        }
+    language: str
+    phase: str
+    time: float
+    memory: float
 
 
-def c(source: str, args: List[str] = [], compiler: str = "gcc") -> Benchmark:
-    return Benchmark(
-        name=source,
-        compile=[compiler, "-O3", source],
-        run=["./a.out", *args],
+@dataclass
+class Language:
+    name: str
+    run_cmd: List[str]
+    compile_cmd: Optional[List[str]] = None
+    cleanup: List[str] = field(default_factory=list)
+
+    @staticmethod
+    def measure(bench_name: str, cmd: List[str]) -> Dict[str, float]:
+        try:
+            path = os.path.join("src", bench_name)
+            p = subprocess.run(
+                ["python", "measure.py", path, *cmd],
+                capture_output=True,
+                check=True,
+            )
+            return json.loads(p.stdout.decode("utf-8"))
+        except subprocess.CalledProcessError as e:
+            raise RuntimeError(e.stderr.decode("utf-8"))
+
+    def run(self, bench_name: str, repeats: int) -> Iterable[Result]:
+        if self.compile_cmd:
+            stats = Language.measure(bench_name, self.compile_cmd)
+            yield Result(
+                bench_name, self.name, "compile", stats["time"], stats["memory"]
+            )
+
+        for _ in range(repeats):
+            stats = Language.measure(bench_name, self.run_cmd)
+            yield Result(bench_name, self.name, "run", stats["time"], stats["memory"])
+
+        for filename in self.cleanup:
+            os.remove(os.path.join("src", bench_name, filename))
+
+
+@dataclass
+class Benchmark:
+    name: str
+    repeats: int = 1
+    languages: List[Language] = field(default_factory=list)
+
+    def run(self) -> Iterable[Result]:
+        for lang in self.languages:
+            for result in lang.run(self.name, self.repeats):
+                yield result
+
+
+def c(args: List[str] = []) -> Language:
+    return Language(
+        name="C",
+        compile_cmd=["gcc", "-O3", "main.c"],
+        run_cmd=["./a.out", *args],
         cleanup=["a.out"],
     )
 
 
-def go(source: str, args: List[str] = []) -> Benchmark:
-    (name, _) = os.path.splitext(source)
-    return Benchmark(
-        name=source,
-        compile=["go", "build", source],
-        run=["./" + name, *args],
-        cleanup=[name],
+def go(args: List[str] = []) -> Language:
+    return Language(
+        name="Go",
+        compile_cmd=["go", "build", "main.go"],
+        run_cmd=["./main", *args],
+        cleanup=["main"],
     )
 
 
-def haskell(source: str, args: List[str] = []) -> Benchmark:
-    (name, _) = os.path.splitext(source)
-    return Benchmark(
-        name=source,
-        compile=["ghc", source, "-O3"],
-        run=["./" + name, *args],
-        cleanup=[name, name + ".hi", name + ".o"],
+def haskell(args: List[str] = []) -> Language:
+    return Language(
+        name="Haskell",
+        compile_cmd=["ghc", "main.hs", "-O3"],
+        run_cmd=["./main", *args],
+        cleanup=["main", "main.hi", "main.o"],
     )
 
 
-def java(source: str, args: List[str] = []) -> Benchmark:
-    (mainClass, _) = os.path.splitext(source)
-    return Benchmark(
-        name=source,
-        compile=["javac", source],
-        run=["java", mainClass, *args],
-        cleanup=[mainClass + ".class"],
+def java(args: List[str] = []) -> Language:
+    return Language(
+        name="Java",
+        compile_cmd=["javac", "Main.java"],
+        run_cmd=["java", "Main", *args],
+        cleanup=["Main.class"],
     )
 
 
-def python(source: str, args: List[str] = []) -> Benchmark:
-    return Benchmark(source, ["python", source, *args])
+def python(args: List[str] = []) -> Language:
+    return Language("Python", ["python", "main.py", *args])
 
 
-def ruby(source: str, args: List[str] = []) -> Benchmark:
-    return Benchmark(source, ["ruby", source, *args])
-
-
-def get_stats(xs: List[float]) -> Stats:
-    return Stats(min=min(xs), max=max(xs), avg=sum(xs) / len(xs))
-
-
-def measure(cmd: List[str]) -> Dict[str, float]:
-    try:
-        p = subprocess.run(
-            ["python", "measure.py", "src/", *cmd],
-            capture_output=True,
-            check=True,
-        )
-        return json.loads(p.stdout.decode("utf-8"))
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(e.stderr.decode("utf-8"))
-
-
-def get_results(benchmark: Benchmark, repeats: int) -> Result:
-    compile_results = measure(benchmark.compile) if benchmark.compile else {}
-    runs_results = [measure(benchmark.run) for _ in range(repeats)]
-    for filename in benchmark.cleanup:
-        os.remove(os.path.join("src", filename))
-
-    return Result(
-        name=benchmark.name,
-        compile_time=compile_results.get("time"),
-        compile_memory=compile_results.get("memory"),
-        run_time=get_stats([run["time"] for run in runs_results]),
-        run_memory=get_stats([run["memory"] for run in runs_results]),
-    )
+def ruby(args: List[str] = []) -> Language:
+    return Language("Ruby", ["ruby", "main.rb", *args])

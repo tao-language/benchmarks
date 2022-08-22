@@ -5,55 +5,50 @@ import benchmark as bm
 
 
 benchmarks = [
-    bm.c("hello-world.c"),
-    bm.go("hello-world.go"),
-    bm.haskell("hello-world.hs"),
-    bm.java("HelloWorld.java"),
-    bm.python("hello-world.py"),
-    bm.ruby("hello-world.rb"),
+    bm.Benchmark(
+        name="hello-world",
+        repeats=10,
+        languages=[bm.c(), bm.go(), bm.haskell(), bm.java(), bm.python(), bm.ruby()],
+    )
 ]
 
 
 def print_table(results: Iterable[bm.Result]):
     for i, result in enumerate(results):
-        result_dict = result.to_dict()
         if i == 0:
-            column_names = [f"{name:10}" for name in result_dict.keys()]
-            print("\t".join([" " * 20, *column_names]))
+            column_names = [f"{name:10}" for name in result.__dict__.keys()]
+            print("\t".join(column_names))
 
         row = [
-            f"{value:10.4f}" if value is not None else " " * 10
-            for value in result_dict.values()
+            f"{value:10.4f}" if type(value) == float else f"{value:10}"
+            for value in result.__dict__.values()
         ]
-        print("\t".join([f"{result.name:20}", *row]))
+        print("\t".join(row))
 
 
 def print_csv(results: Iterable[bm.Result]):
     writer = csv.writer(sys.stdout)
     for i, result in enumerate(results):
-        result_dict = result.to_dict()
         if i == 0:
-            column_names = list(result_dict.keys())
-            writer.writerow(["name", *column_names])
-
-        row = [value for value in result_dict.values()]
-        writer.writerow([result.name, *row])
+            writer.writerow(result.__dict__.keys())
+        writer.writerow(result.__dict__.values())
 
 
-def run(benchmarks: List[bm.Benchmark], repeats: int) -> Iterable[bm.Result]:
-    for benchmark in benchmarks:
-        yield bm.get_results(benchmark, repeats)
+def run(benchmarks: List[bm.Benchmark]) -> Iterable[bm.Result]:
+    for bench in benchmarks:
+        for result in bench.run():
+            yield result
 
 
 if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--repeats", type=int, default=1)
+    parser.add_argument("--repeats", type=int, default=10)
     parser.add_argument("--format", choices=["table", "csv"], default="table")
     args = parser.parse_args()
 
-    results = run(benchmarks, args.repeats)
+    results = run(benchmarks)
     if args.format == "table":
         print_table(results)
     elif args.format == "csv":
