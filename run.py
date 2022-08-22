@@ -8,8 +8,13 @@ benchmarks = [
     bm.Benchmark(
         name="hello-world",
         repeats=10,
-        languages=[bm.c(), bm.go(), bm.haskell(), bm.java(), bm.python(), bm.ruby()],
-    )
+        languages=[bm.c(), bm.go(), bm.haskell(), bm.java(), bm.python()],
+    ),
+    bm.Benchmark(
+        name="fibonacci",
+        repeats=10,
+        languages=[bm.c(), bm.go(), bm.haskell(), bm.java(), bm.python()],
+    ),
 ]
 
 
