@@ -1,5 +1,5 @@
 import subprocess
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 import json
 import os
 import sys
@@ -14,6 +14,14 @@ class Result:
     time_sec: float
     memory_mb: float
     output: str
+
+    def trim_output(self):
+        output = (
+            self.output
+            if len(self.output) < 20
+            else f"{self.output[:15]} ({len(self.output)} characters)"
+        )
+        return replace(self, output=output)
 
 
 @dataclass
@@ -109,12 +117,16 @@ class Benchmark:
                     assert result.output == self.result, "\n".join(
                         [
                             f"Incorrect result on {lang.name} {self.name}:",
-                            result.output,
+                            result.output
+                            if len(result.output) < 100
+                            else f"{result.output[:20]} ... {result.output[-20:]}",
                             f"---=== Expected ===---",
-                            f"{self.result}",
+                            f"{self.result}"
+                            if len(self.result) < 100
+                            else f"{self.result[:20]} ... {self.result[-20:]}",
                         ]
                     )
-                    yield result
+                    yield result.trim_output()
 
             for filename in lang.cleanup:
                 try:

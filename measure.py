@@ -15,8 +15,8 @@ def measure(cmd: str, args: List[str], directory: str = ".") -> Dict[str, float]
         res = resource.getrusage(resource.RUSAGE_CHILDREN)
 
         return {
-            "stdout": p.stdout.decode("utf-8").strip(),
-            "stderr": p.stderr.decode("utf-8").strip(),
+            "stdout": p.stdout.decode("utf-8").rstrip(),
+            "stderr": p.stderr.decode("utf-8").rstrip(),
             "time": res.ru_utime + res.ru_stime,
             "memory": res.ru_maxrss,
         }

@@ -1,196 +1,196 @@
 name,language,phase,time_sec,memory_mb,output
-hello-world Hi! 😊,C,compile,0.13101,26.01171875,
-hello-world Hi! 😊,C,run,0.001866,0.66015625,Hi! 😊
-hello-world Hi! 😊,C,run,0.001679,0.640625,Hi! 😊
-hello-world Hi! 😊,C,run,0.00157,0.640625,Hi! 😊
-hello-world Hi! 😊,C,run,0.0015789999999999999,0.640625,Hi! 😊
-hello-world Hi! 😊,C,run,0.001892,0.640625,Hi! 😊
-hello-world Hi! 😊,C,run,0.001607,0.640625,Hi! 😊
-hello-world Hi! 😊,C,run,0.001539,0.640625,Hi! 😊
-hello-world Hi! 😊,C,run,0.0015689999999999999,0.640625,Hi! 😊
-hello-world Hi! 😊,C,run,0.001716,0.640625,Hi! 😊
-hello-world Hi! 😊,C,run,0.001902,0.6484375,Hi! 😊
-hello-world Hi! 😊,Go,compile,0.6197389999999999,44.43359375,
-hello-world Hi! 😊,Go,run,0.0032129999999999997,1.75390625,Hi! 😊
-hello-world Hi! 😊,Go,run,0.002783,1.7578125,Hi! 😊
-hello-world Hi! 😊,Go,run,0.002708,1.7265625,Hi! 😊
-hello-world Hi! 😊,Go,run,0.0027799999999999995,1.75390625,Hi! 😊
-hello-world Hi! 😊,Go,run,0.002822,1.80859375,Hi! 😊
-hello-world Hi! 😊,Go,run,0.0031919999999999995,1.7578125,Hi! 😊
-hello-world Hi! 😊,Go,run,0.0029829999999999995,1.76171875,Hi! 😊
-hello-world Hi! 😊,Go,run,0.002706,1.7578125,Hi! 😊
-hello-world Hi! 😊,Go,run,0.0026089999999999998,1.75390625,Hi! 😊
-hello-world Hi! 😊,Go,run,0.002621,1.7578125,Hi! 😊
-hello-world Hi! 😊,Haskell,compile,1.141283,85.1015625,"[1 of 1] Compiling Main             ( main.hs, main.o )
+hello-world Hi! 😊,C,compile,0.11926999999999999,26.01953125,
+hello-world Hi! 😊,C,run,0.0017599999999999998,0.65234375,Hi! 😊
+hello-world Hi! 😊,C,run,0.001579,0.640625,Hi! 😊
+hello-world Hi! 😊,C,run,0.0017549999999999998,0.640625,Hi! 😊
+hello-world Hi! 😊,C,run,0.001728,0.640625,Hi! 😊
+hello-world Hi! 😊,C,run,0.001606,0.640625,Hi! 😊
+hello-world Hi! 😊,C,run,0.0014689999999999998,0.640625,Hi! 😊
+hello-world Hi! 😊,C,run,0.001497,0.640625,Hi! 😊
+hello-world Hi! 😊,C,run,0.0015919999999999999,0.640625,Hi! 😊
+hello-world Hi! 😊,C,run,0.001879,0.640625,Hi! 😊
+hello-world Hi! 😊,C,run,0.001516,0.640625,Hi! 😊
+hello-world Hi! 😊,Go,compile,0.765692,46.91015625,
+hello-world Hi! 😊,Go,run,0.003054,1.7578125,Hi! 😊
+hello-world Hi! 😊,Go,run,0.002791,1.7578125,Hi! 😊
+hello-world Hi! 😊,Go,run,0.0027349999999999996,1.76171875,Hi! 😊
+hello-world Hi! 😊,Go,run,0.0028120000000000003,1.75390625,Hi! 😊
+hello-world Hi! 😊,Go,run,0.002943,1.7578125,Hi! 😊
+hello-world Hi! 😊,Go,run,0.0031899999999999997,1.76171875,Hi! 😊
+hello-world Hi! 😊,Go,run,0.002776,1.71875,Hi! 😊
+hello-world Hi! 😊,Go,run,0.002778,1.75390625,Hi! 😊
+hello-world Hi! 😊,Go,run,0.0027549999999999996,1.7578125,Hi! 😊
+hello-world Hi! 😊,Go,run,0.0028640000000000002,1.76171875,Hi! 😊
+hello-world Hi! 😊,Haskell,compile,0.9311879999999999,85.125,"[1 of 1] Compiling Main             ( main.hs, main.o )
 Linking main ..."
-hello-world Hi! 😊,Haskell,run,0.006814,3.421875,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.0065509999999999995,3.43359375,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.006419,3.4375,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.007852,3.43359375,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.007769,3.4375,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.006984,3.4375,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.00673,3.421875,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.008167,3.43359375,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.006444,3.4375,Hi! 😊
-hello-world Hi! 😊,Haskell,run,0.005939,3.421875,Hi! 😊
-hello-world Hi! 😊,Java,compile,0.9372999999999999,62.921875,
-hello-world Hi! 😊,Java,run,0.04904699999999999,23.7890625,Hi! 😊
-hello-world Hi! 😊,Java,run,0.048931999999999996,23.78125,Hi! 😊
-hello-world Hi! 😊,Java,run,0.04878,23.765625,Hi! 😊
-hello-world Hi! 😊,Java,run,0.053935,23.8125,Hi! 😊
-hello-world Hi! 😊,Java,run,0.047175999999999996,23.83203125,Hi! 😊
-hello-world Hi! 😊,Java,run,0.048651,23.7890625,Hi! 😊
-hello-world Hi! 😊,Java,run,0.048692,23.8125,Hi! 😊
-hello-world Hi! 😊,Java,run,0.049495,23.79296875,Hi! 😊
-hello-world Hi! 😊,Java,run,0.049578,23.91015625,Hi! 😊
-hello-world Hi! 😊,Java,run,0.048098,23.80078125,Hi! 😊
-hello-world Hi! 😊,Python,run,0.024652,6.37890625,Hi! 😊
-hello-world Hi! 😊,Python,run,0.024961,6.38671875,Hi! 😊
-hello-world Hi! 😊,Python,run,0.025508,6.4140625,Hi! 😊
-hello-world Hi! 😊,Python,run,0.024054,6.33984375,Hi! 😊
-hello-world Hi! 😊,Python,run,0.025821999999999998,6.3828125,Hi! 😊
-hello-world Hi! 😊,Python,run,0.02848,6.37109375,Hi! 😊
-hello-world Hi! 😊,Python,run,0.025272999999999997,6.35546875,Hi! 😊
-hello-world Hi! 😊,Python,run,0.02452,6.3984375,Hi! 😊
-hello-world Hi! 😊,Python,run,0.0264,6.36328125,Hi! 😊
-hello-world Hi! 😊,Python,run,0.023805999999999997,6.3515625,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.099266,10.46484375,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.11418999999999999,10.484375,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.099906,10.40625,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.09297699999999999,10.40625,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.09360399999999999,10.4140625,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.10133,10.4453125,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.096745,10.5390625,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.09512,10.515625,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.092335,10.578125,Hi! 😊
-hello-world Hi! 😊,Ruby,run,0.094455,10.40234375,Hi! 😊
-fibonacci 20,C,compile,0.130824,29.2578125,
-fibonacci 20,C,run,0.001748,0.65234375,6765
-fibonacci 20,C,run,0.001679,0.640625,6765
-fibonacci 20,C,run,0.0022099999999999997,0.66015625,6765
-fibonacci 20,C,run,0.0016289999999999998,0.640625,6765
-fibonacci 20,C,run,0.001503,0.640625,6765
-fibonacci 20,C,run,0.0017039999999999998,0.640625,6765
-fibonacci 20,C,run,0.0017529999999999998,0.640625,6765
-fibonacci 20,C,run,0.001566,0.640625,6765
-fibonacci 20,C,run,0.001566,0.640625,6765
-fibonacci 20,C,run,0.001696,0.640625,6765
-fibonacci 20,Go,compile,0.5721069999999999,47.1796875,
-fibonacci 20,Go,run,0.003463,1.74609375,6765
-fibonacci 20,Go,run,0.003067,1.79296875,6765
-fibonacci 20,Go,run,0.002954,1.7578125,6765
-fibonacci 20,Go,run,0.002804,1.7421875,6765
-fibonacci 20,Go,run,0.003346,1.7421875,6765
-fibonacci 20,Go,run,0.0026959999999999996,1.74609375,6765
-fibonacci 20,Go,run,0.002811,1.74609375,6765
-fibonacci 20,Go,run,0.002705,1.72265625,6765
-fibonacci 20,Go,run,0.0026119999999999997,1.7421875,6765
-fibonacci 20,Go,run,0.002673,1.74609375,6765
-fibonacci 20,Haskell,compile,1.395794,99.40234375,"[1 of 1] Compiling Main             ( main.hs, main.o )
+hello-world Hi! 😊,Haskell,run,0.007098,3.421875,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.008655,3.421875,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.008387,3.421875,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.006182,3.421875,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.006676,3.43359375,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.0068189999999999995,3.4375,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.007627999999999999,3.43359375,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.006109,3.421875,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.005974999999999999,3.421875,Hi! 😊
+hello-world Hi! 😊,Haskell,run,0.008584,3.421875,Hi! 😊
+hello-world Hi! 😊,Java,compile,0.924758,65.84765625,
+hello-world Hi! 😊,Java,run,0.048275,23.921875,Hi! 😊
+hello-world Hi! 😊,Java,run,0.046598,23.87890625,Hi! 😊
+hello-world Hi! 😊,Java,run,0.045632,23.7734375,Hi! 😊
+hello-world Hi! 😊,Java,run,0.048359,23.8203125,Hi! 😊
+hello-world Hi! 😊,Java,run,0.046821,23.84765625,Hi! 😊
+hello-world Hi! 😊,Java,run,0.048743999999999996,23.875,Hi! 😊
+hello-world Hi! 😊,Java,run,0.04648,23.8984375,Hi! 😊
+hello-world Hi! 😊,Java,run,0.046309,23.8984375,Hi! 😊
+hello-world Hi! 😊,Java,run,0.04621,23.86328125,Hi! 😊
+hello-world Hi! 😊,Java,run,0.045746999999999996,23.9140625,Hi! 😊
+hello-world Hi! 😊,Python,run,0.024891999999999997,6.359375,Hi! 😊
+hello-world Hi! 😊,Python,run,0.022763,6.359375,Hi! 😊
+hello-world Hi! 😊,Python,run,0.023186,6.3671875,Hi! 😊
+hello-world Hi! 😊,Python,run,0.022697000000000002,6.38671875,Hi! 😊
+hello-world Hi! 😊,Python,run,0.023731,6.3828125,Hi! 😊
+hello-world Hi! 😊,Python,run,0.023126999999999998,6.3515625,Hi! 😊
+hello-world Hi! 😊,Python,run,0.022825,6.34765625,Hi! 😊
+hello-world Hi! 😊,Python,run,0.024600999999999998,6.37109375,Hi! 😊
+hello-world Hi! 😊,Python,run,0.022613,6.3515625,Hi! 😊
+hello-world Hi! 😊,Python,run,0.022926,6.375,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.090485,10.40625,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.08837,10.5703125,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.09397499999999999,10.39453125,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.09422,10.51171875,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.098274,10.53125,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.094916,10.5625,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.10320399999999999,10.39453125,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.101501,10.44140625,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.092472,10.41796875,Hi! 😊
+hello-world Hi! 😊,Ruby,run,0.089243,10.5546875,Hi! 😊
+fibonacci 20,C,compile,0.127741,29.26171875,
+fibonacci 20,C,run,0.0016510000000000001,0.640625,6765
+fibonacci 20,C,run,0.001733,0.640625,6765
+fibonacci 20,C,run,0.0018,0.640625,6765
+fibonacci 20,C,run,0.001598,0.640625,6765
+fibonacci 20,C,run,0.0015789999999999999,0.640625,6765
+fibonacci 20,C,run,0.001717,0.640625,6765
+fibonacci 20,C,run,0.001599,0.640625,6765
+fibonacci 20,C,run,0.0018219999999999998,0.640625,6765
+fibonacci 20,C,run,0.0015899999999999998,0.640625,6765
+fibonacci 20,C,run,0.0016359999999999999,0.640625,6765
+fibonacci 20,Go,compile,0.337223,44.47265625,
+fibonacci 20,Go,run,0.0029769999999999996,1.74609375,6765
+fibonacci 20,Go,run,0.00281,1.74609375,6765
+fibonacci 20,Go,run,0.003415,1.74609375,6765
+fibonacci 20,Go,run,0.0026899999999999997,1.74609375,6765
+fibonacci 20,Go,run,0.002786,1.7421875,6765
+fibonacci 20,Go,run,0.0028179999999999998,1.74609375,6765
+fibonacci 20,Go,run,0.0031349999999999998,1.74609375,6765
+fibonacci 20,Go,run,0.002845,1.75,6765
+fibonacci 20,Go,run,0.0028079999999999997,1.74609375,6765
+fibonacci 20,Go,run,0.00274,1.74609375,6765
+fibonacci 20,Haskell,compile,0.8639060000000001,99.40625,"[1 of 1] Compiling Main             ( main.hs, main.o )
 Linking main ..."
-fibonacci 20,Haskell,run,0.007279,3.5703125,6765
-fibonacci 20,Haskell,run,0.006422,3.57421875,6765
-fibonacci 20,Haskell,run,0.005545,3.578125,6765
-fibonacci 20,Haskell,run,0.005482,3.57421875,6765
-fibonacci 20,Haskell,run,0.007008,3.57421875,6765
-fibonacci 20,Haskell,run,0.008016,3.57421875,6765
-fibonacci 20,Haskell,run,0.008014,3.578125,6765
-fibonacci 20,Haskell,run,0.005398999999999999,3.5625,6765
-fibonacci 20,Haskell,run,0.006817,3.578125,6765
-fibonacci 20,Haskell,run,0.0065509999999999995,3.578125,6765
-fibonacci 20,Java,compile,1.069501,71.265625,
-fibonacci 20,Java,run,0.060504,26.078125,6765
-fibonacci 20,Java,run,0.05903699999999999,26.15625,6765
-fibonacci 20,Java,run,0.058464,26.18359375,6765
-fibonacci 20,Java,run,0.059121,26.125,6765
-fibonacci 20,Java,run,0.058013999999999996,26.015625,6765
-fibonacci 20,Java,run,0.058795999999999994,26.1171875,6765
-fibonacci 20,Java,run,0.057585,26.12109375,6765
-fibonacci 20,Java,run,0.057269,26.15625,6765
-fibonacci 20,Java,run,0.058379999999999994,26.1484375,6765
-fibonacci 20,Java,run,0.05914799999999999,26.1484375,6765
-fibonacci 20,Python,run,0.02573,6.453125,6765
-fibonacci 20,Python,run,0.025015,6.42578125,6765
-fibonacci 20,Python,run,0.024746999999999998,6.43359375,6765
-fibonacci 20,Python,run,0.024919,6.4140625,6765
-fibonacci 20,Python,run,0.024757,6.42578125,6765
-fibonacci 20,Python,run,0.024968999999999998,6.43359375,6765
-fibonacci 20,Python,run,0.024494,6.3984375,6765
-fibonacci 20,Python,run,0.026983,6.375,6765
-fibonacci 20,Python,run,0.024603,6.4453125,6765
-fibonacci 20,Python,run,0.024723,6.43359375,6765
-fibonacci 20,Ruby,run,0.089645,10.609375,6765
-fibonacci 20,Ruby,run,0.089503,10.5390625,6765
-fibonacci 20,Ruby,run,0.08939599999999999,10.5234375,6765
-fibonacci 20,Ruby,run,0.087771,10.48828125,6765
-fibonacci 20,Ruby,run,0.08735299999999999,10.53125,6765
-fibonacci 20,Ruby,run,0.094522,10.45703125,6765
-fibonacci 20,Ruby,run,0.09056700000000001,10.52734375,6765
-fibonacci 20,Ruby,run,0.08844999999999999,10.515625,6765
-fibonacci 20,Ruby,run,0.08938199999999999,10.4921875,6765
-fibonacci 20,Ruby,run,0.087861,10.56640625,6765
-fibonacci 30,C,compile,0.11602299999999999,29.23828125,
-fibonacci 30,C,run,0.003994,0.6484375,832040
-fibonacci 30,C,run,0.003786,0.6484375,832040
-fibonacci 30,C,run,0.004141,0.65234375,832040
-fibonacci 30,C,run,0.003706,0.640625,832040
-fibonacci 30,C,run,0.0037739999999999996,0.6484375,832040
-fibonacci 30,C,run,0.003833,0.640625,832040
-fibonacci 30,C,run,0.0038199999999999996,0.640625,832040
-fibonacci 30,C,run,0.003851,0.640625,832040
-fibonacci 30,C,run,0.003738,0.640625,832040
-fibonacci 30,C,run,0.003986,0.640625,832040
-fibonacci 30,Go,compile,0.335507,44.41796875,
-fibonacci 30,Go,run,0.0067139999999999995,1.74609375,832040
-fibonacci 30,Go,run,0.006703,1.7421875,832040
-fibonacci 30,Go,run,0.0064979999999999994,1.7109375,832040
-fibonacci 30,Go,run,0.0065049999999999995,1.7109375,832040
-fibonacci 30,Go,run,0.00641,1.74609375,832040
-fibonacci 30,Go,run,0.006942,1.71484375,832040
-fibonacci 30,Go,run,0.006689,1.74609375,832040
-fibonacci 30,Go,run,0.006750999999999999,1.74609375,832040
-fibonacci 30,Go,run,0.006555,1.74609375,832040
-fibonacci 30,Go,run,0.0064659999999999995,1.74609375,832040
-fibonacci 30,Haskell,compile,0.792727,85.86328125,"[1 of 1] Compiling Main             ( main.hs, main.o )
+fibonacci 20,Haskell,run,0.008846,3.578125,6765
+fibonacci 20,Haskell,run,0.005881,3.578125,6765
+fibonacci 20,Haskell,run,0.006992999999999999,3.5625,6765
+fibonacci 20,Haskell,run,0.007181999999999999,3.578125,6765
+fibonacci 20,Haskell,run,0.005791,3.5625,6765
+fibonacci 20,Haskell,run,0.005752999999999999,3.57421875,6765
+fibonacci 20,Haskell,run,0.009111,3.57421875,6765
+fibonacci 20,Haskell,run,0.007349,3.57421875,6765
+fibonacci 20,Haskell,run,0.007542999999999999,3.5625,6765
+fibonacci 20,Haskell,run,0.008589,3.57421875,6765
+fibonacci 20,Java,compile,0.926614,68.84375,
+fibonacci 20,Java,run,0.060275999999999996,26.16796875,6765
+fibonacci 20,Java,run,0.060607,26.17578125,6765
+fibonacci 20,Java,run,0.058875,26.05859375,6765
+fibonacci 20,Java,run,0.058844999999999995,26.1484375,6765
+fibonacci 20,Java,run,0.061399999999999996,26.08203125,6765
+fibonacci 20,Java,run,0.06362,26.078125,6765
+fibonacci 20,Java,run,0.058779,26.1796875,6765
+fibonacci 20,Java,run,0.062285999999999994,26.09765625,6765
+fibonacci 20,Java,run,0.06454499999999999,26.078125,6765
+fibonacci 20,Java,run,0.059558999999999994,26.09375,6765
+fibonacci 20,Python,run,0.027232999999999997,6.45703125,6765
+fibonacci 20,Python,run,0.02567,6.4296875,6765
+fibonacci 20,Python,run,0.026235999999999995,6.421875,6765
+fibonacci 20,Python,run,0.026331,6.421875,6765
+fibonacci 20,Python,run,0.02655,6.40234375,6765
+fibonacci 20,Python,run,0.026203999999999998,6.40234375,6765
+fibonacci 20,Python,run,0.029251,6.41015625,6765
+fibonacci 20,Python,run,0.026466,6.40625,6765
+fibonacci 20,Python,run,0.026969999999999997,6.421875,6765
+fibonacci 20,Python,run,0.032980999999999996,6.41015625,6765
+fibonacci 20,Ruby,run,0.11885799999999999,10.37890625,6765
+fibonacci 20,Ruby,run,0.108653,10.43359375,6765
+fibonacci 20,Ruby,run,0.10850499999999999,10.44921875,6765
+fibonacci 20,Ruby,run,0.10642299999999999,10.45703125,6765
+fibonacci 20,Ruby,run,0.091677,10.50390625,6765
+fibonacci 20,Ruby,run,0.095104,10.57421875,6765
+fibonacci 20,Ruby,run,0.09885899999999999,10.515625,6765
+fibonacci 20,Ruby,run,0.095459,10.484375,6765
+fibonacci 20,Ruby,run,0.091283,10.42578125,6765
+fibonacci 20,Ruby,run,0.096575,10.5,6765
+fibonacci 30,C,compile,0.12443,29.22265625,
+fibonacci 30,C,run,0.004124,0.65234375,832040
+fibonacci 30,C,run,0.0042899999999999995,0.640625,832040
+fibonacci 30,C,run,0.00381,0.640625,832040
+fibonacci 30,C,run,0.003807,0.640625,832040
+fibonacci 30,C,run,0.003845,0.6484375,832040
+fibonacci 30,C,run,0.004046999999999999,0.640625,832040
+fibonacci 30,C,run,0.003985,0.640625,832040
+fibonacci 30,C,run,0.003926,0.640625,832040
+fibonacci 30,C,run,0.00394,0.6484375,832040
+fibonacci 30,C,run,0.0043029999999999995,0.640625,832040
+fibonacci 30,Go,compile,0.32510799999999995,44.125,
+fibonacci 30,Go,run,0.006889999999999999,1.77734375,832040
+fibonacci 30,Go,run,0.00739,1.74609375,832040
+fibonacci 30,Go,run,0.006634999999999999,1.7421875,832040
+fibonacci 30,Go,run,0.0065699999999999995,1.74609375,832040
+fibonacci 30,Go,run,0.006704999999999999,1.70703125,832040
+fibonacci 30,Go,run,0.006758999999999999,1.796875,832040
+fibonacci 30,Go,run,0.006658999999999999,1.7421875,832040
+fibonacci 30,Go,run,0.00686,1.7421875,832040
+fibonacci 30,Go,run,0.0067269999999999995,1.75,832040
+fibonacci 30,Go,run,0.006770999999999999,1.71484375,832040
+fibonacci 30,Haskell,compile,0.83603,85.9140625,"[1 of 1] Compiling Main             ( main.hs, main.o )
 Linking main ..."
-fibonacci 30,Haskell,run,0.012206999999999999,3.578125,832040
-fibonacci 30,Haskell,run,0.012591,3.5625,832040
-fibonacci 30,Haskell,run,0.013028999999999999,3.58203125,832040
-fibonacci 30,Haskell,run,0.010698,3.578125,832040
-fibonacci 30,Haskell,run,0.011074,3.5625,832040
-fibonacci 30,Haskell,run,0.011387999999999999,3.578125,832040
-fibonacci 30,Haskell,run,0.010703999999999998,3.578125,832040
-fibonacci 30,Haskell,run,0.012402999999999999,3.58203125,832040
-fibonacci 30,Haskell,run,0.010915000000000001,3.578125,832040
-fibonacci 30,Haskell,run,0.012171,3.57421875,832040
-fibonacci 30,Java,compile,1.015614,72.02734375,
-fibonacci 30,Java,run,0.065365,26.12890625,832040
-fibonacci 30,Java,run,0.063442,26.109375,832040
-fibonacci 30,Java,run,0.074487,26.09765625,832040
-fibonacci 30,Java,run,0.061822999999999996,26.11328125,832040
-fibonacci 30,Java,run,0.064982,26.12890625,832040
-fibonacci 30,Java,run,0.061857999999999996,26.1328125,832040
-fibonacci 30,Java,run,0.062376999999999995,26.11328125,832040
-fibonacci 30,Java,run,0.062172,26.1171875,832040
-fibonacci 30,Java,run,0.061209,26.12890625,832040
-fibonacci 30,Java,run,0.061424,26.13671875,832040
-fibonacci 30,Python,run,0.257528,6.45703125,832040
-fibonacci 30,Python,run,0.265971,6.40625,832040
-fibonacci 30,Python,run,0.26166,6.41015625,832040
-fibonacci 30,Python,run,0.257389,6.41796875,832040
-fibonacci 30,Python,run,0.261872,6.44140625,832040
-fibonacci 30,Python,run,0.26268499999999995,6.3984375,832040
-fibonacci 30,Python,run,0.258583,6.41015625,832040
-fibonacci 30,Python,run,0.262026,6.453125,832040
-fibonacci 30,Python,run,0.265118,6.4453125,832040
-fibonacci 30,Python,run,0.26236,6.44140625,832040
-fibonacci 30,Ruby,run,0.181962,10.5546875,832040
-fibonacci 30,Ruby,run,0.18162699999999998,10.44140625,832040
-fibonacci 30,Ruby,run,0.17613600000000001,10.53515625,832040
-fibonacci 30,Ruby,run,0.17583100000000002,10.59375,832040
-fibonacci 30,Ruby,run,0.17245,10.6015625,832040
-fibonacci 30,Ruby,run,0.175028,10.5703125,832040
-fibonacci 30,Ruby,run,0.170081,10.421875,832040
-fibonacci 30,Ruby,run,0.177719,10.44140625,832040
-fibonacci 30,Ruby,run,0.172037,10.48828125,832040
-fibonacci 30,Ruby,run,0.17105499999999998,10.47265625,832040
+fibonacci 30,Haskell,run,0.012215,3.5625,832040
+fibonacci 30,Haskell,run,0.012784,3.5625,832040
+fibonacci 30,Haskell,run,0.011382999999999999,3.578125,832040
+fibonacci 30,Haskell,run,0.011914999999999999,3.578125,832040
+fibonacci 30,Haskell,run,0.012022999999999999,3.57421875,832040
+fibonacci 30,Haskell,run,0.011437,3.578125,832040
+fibonacci 30,Haskell,run,0.012437,3.5625,832040
+fibonacci 30,Haskell,run,0.012798,3.57421875,832040
+fibonacci 30,Haskell,run,0.01296,3.5625,832040
+fibonacci 30,Haskell,run,0.01223,3.5625,832040
+fibonacci 30,Java,compile,0.9527359999999999,69.5234375,
+fibonacci 30,Java,run,0.061182,26.16796875,832040
+fibonacci 30,Java,run,0.06429,26.14453125,832040
+fibonacci 30,Java,run,0.068964,26.13671875,832040
+fibonacci 30,Java,run,0.06622,26.0703125,832040
+fibonacci 30,Java,run,0.064634,26.109375,832040
+fibonacci 30,Java,run,0.06264299999999999,26.1328125,832040
+fibonacci 30,Java,run,0.064287,26.14453125,832040
+fibonacci 30,Java,run,0.061681,26.09375,832040
+fibonacci 30,Java,run,0.061818,26.15234375,832040
+fibonacci 30,Java,run,0.067832,26.1328125,832040
+fibonacci 30,Python,run,0.27751,6.4453125,832040
+fibonacci 30,Python,run,0.261577,6.41796875,832040
+fibonacci 30,Python,run,0.26387099999999997,6.43359375,832040
+fibonacci 30,Python,run,0.26152499999999995,6.4609375,832040
+fibonacci 30,Python,run,0.26221799999999995,6.453125,832040
+fibonacci 30,Python,run,0.264455,6.44140625,832040
+fibonacci 30,Python,run,0.271512,6.4375,832040
+fibonacci 30,Python,run,0.271467,6.4140625,832040
+fibonacci 30,Python,run,0.264335,6.41796875,832040
+fibonacci 30,Python,run,0.261908,6.44921875,832040
+fibonacci 30,Ruby,run,0.175361,10.453125,832040
+fibonacci 30,Ruby,run,0.177291,10.4453125,832040
+fibonacci 30,Ruby,run,0.19637,10.41796875,832040
+fibonacci 30,Ruby,run,0.199312,10.54296875,832040
+fibonacci 30,Ruby,run,0.19474999999999998,10.48046875,832040
+fibonacci 30,Ruby,run,0.179973,10.45703125,832040
+fibonacci 30,Ruby,run,0.17724600000000001,10.37109375,832040
+fibonacci 30,Ruby,run,0.182665,10.50390625,832040
+fibonacci 30,Ruby,run,0.18287899999999999,10.515625,832040
+fibonacci 30,Ruby,run,0.179135,10.203125,832040
