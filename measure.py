@@ -25,6 +25,7 @@ def measure(cmd: str, args: List[str], directory: str = ".") -> Dict[str, float]
 
 
 if __name__ == "__main__":
+    # Do not use argparse to not interfere with flags passed to the subprocess.
     if len(sys.argv) < 3:
         raise ValueError("usage: measure.py directory command arguments..")
 

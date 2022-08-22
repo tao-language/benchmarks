@@ -6,6 +6,7 @@ Benchmarks on different programming languages.
 
 You must have the following languages installed.
 
+- [C/C++ compiler](https://clang.llvm.org/get_started.html)
 - [Haskell](https://www.haskell.org/ghcup/)
 - [Java](https://sdkman.io/jdks)
 - [Python](https://www.python.org/downloads/)
