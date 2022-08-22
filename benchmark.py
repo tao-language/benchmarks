@@ -1,9 +1,8 @@
-from enum import Enum
 import subprocess
-from dataclasses import dataclass, field, fields
+from dataclasses import dataclass, field
 import json
 import os
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Dict, Iterable, List, Optional
 
 
 @dataclass
@@ -18,14 +17,20 @@ class Result:
 @dataclass
 class Language:
     name: str
-    run_cmd: List[str]
-    compile_cmd: Optional[List[str]] = None
+    run: List[str]
+    compile: Optional[List[str]] = None
     cleanup: List[str] = field(default_factory=list)
 
-    @staticmethod
-    def measure(bench_name: str, cmd: List[str]) -> Dict[str, float]:
+
+@dataclass
+class Benchmark:
+    name: str
+    repeats: int = 1
+    languages: List[Language] = field(default_factory=list)
+
+    def measure(self, cmd: List[str]) -> Dict[str, float]:
         try:
-            path = os.path.join("src", bench_name)
+            path = os.path.join("src", self.name)
             p = subprocess.run(
                 ["python", "measure.py", path, *cmd],
                 capture_output=True,
@@ -35,38 +40,29 @@ class Language:
         except subprocess.CalledProcessError as e:
             raise RuntimeError(e.stderr.decode("utf-8"))
 
-    def run(self, bench_name: str, repeats: int) -> Iterable[Result]:
-        if self.compile_cmd:
-            stats = Language.measure(bench_name, self.compile_cmd)
-            yield Result(
-                bench_name, self.name, "compile", stats["time"], stats["memory"]
-            )
-
-        for _ in range(repeats):
-            stats = Language.measure(bench_name, self.run_cmd)
-            yield Result(bench_name, self.name, "run", stats["time"], stats["memory"])
-
-        for filename in self.cleanup:
-            os.remove(os.path.join("src", bench_name, filename))
-
-
-@dataclass
-class Benchmark:
-    name: str
-    repeats: int = 1
-    languages: List[Language] = field(default_factory=list)
-
     def run(self) -> Iterable[Result]:
         for lang in self.languages:
-            for result in lang.run(self.name, self.repeats):
-                yield result
+            if lang.compile:
+                stats = self.measure(lang.compile)
+                yield Result(
+                    self.name, lang.name, "compile", stats["time"], stats["memory"]
+                )
+
+            for _ in range(self.repeats):
+                stats = self.measure(lang.run)
+                yield Result(
+                    self.name, lang.name, "run", stats["time"], stats["memory"]
+                )
+
+            for filename in lang.cleanup:
+                os.remove(os.path.join("src", self.name, filename))
 
 
 def c(args: List[str] = []) -> Language:
     return Language(
         name="C",
-        compile_cmd=["gcc", "-O3", "main.c"],
-        run_cmd=["./a.out", *args],
+        compile=["gcc", "-O3", "main.c"],
+        run=["./a.out", *args],
         cleanup=["a.out"],
     )
 
@@ -74,8 +70,8 @@ def c(args: List[str] = []) -> Language:
 def go(args: List[str] = []) -> Language:
     return Language(
         name="Go",
-        compile_cmd=["go", "build", "main.go"],
-        run_cmd=["./main", *args],
+        compile=["go", "build", "main.go"],
+        run=["./main", *args],
         cleanup=["main"],
     )
 
@@ -83,8 +79,8 @@ def go(args: List[str] = []) -> Language:
 def haskell(args: List[str] = []) -> Language:
     return Language(
         name="Haskell",
-        compile_cmd=["ghc", "main.hs", "-O3"],
-        run_cmd=["./main", *args],
+        compile=["ghc", "main.hs", "-O3"],
+        run=["./main", *args],
         cleanup=["main", "main.hi", "main.o"],
     )
 
@@ -92,8 +88,8 @@ def haskell(args: List[str] = []) -> Language:
 def java(args: List[str] = []) -> Language:
     return Language(
         name="Java",
-        compile_cmd=["javac", "Main.java"],
-        run_cmd=["java", "Main", *args],
+        compile=["javac", "Main.java"],
+        run=["java", "Main", *args],
         cleanup=["Main.class"],
     )
 
