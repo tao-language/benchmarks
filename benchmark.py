@@ -2,7 +2,8 @@ import subprocess
 from dataclasses import dataclass, field
 import json
 import os
-from typing import Dict, Iterable, List, Optional
+import sys
+from typing import Dict, Iterable, List, Optional, Tuple
 
 
 @dataclass
@@ -12,6 +13,7 @@ class Result:
     phase: str
     time: float
     memory: float
+    output: str
 
 
 @dataclass
@@ -25,10 +27,42 @@ class Language:
 @dataclass
 class Benchmark:
     name: str
-    repeats: int = 1
-    languages: List[Language] = field(default_factory=list)
+    args: List[str]
+    result: str
+    repeats: int = 10
+    skip: List[str] = field(default_factory=list)
 
-    def measure(self, cmd: List[str]) -> Dict[str, float]:
+    def languages(self) -> List[Language]:
+        return [
+            Language(
+                name="C",
+                compile=["gcc", "-O3", "main.c"],
+                run=["./a.out", *self.args],
+                cleanup=["a.out"],
+            ),
+            Language(
+                name="Go",
+                compile=["go", "build", "main.go"],
+                run=["./main", *self.args],
+                cleanup=["main"],
+            ),
+            Language(
+                name="Haskell",
+                compile=["ghc", "main.hs", "-O3"],
+                run=["./main", *self.args],
+                cleanup=["main", "main.hi", "main.o"],
+            ),
+            Language(
+                name="Java",
+                compile=["javac", "Main.java"],
+                run=["java", "Main", *self.args],
+                cleanup=["Main.class"],
+            ),
+            Language("Python", ["python", "main.py", *self.args]),
+            Language("Ruby", ["ruby", "main.rb", *self.args]),
+        ]
+
+    def measure(self, phase: str, lang_name: str, cmd: List[str]) -> Optional[Result]:
         try:
             path = os.path.join("src", self.name)
             p = subprocess.run(
@@ -36,67 +70,42 @@ class Benchmark:
                 capture_output=True,
                 check=True,
             )
-            return json.loads(p.stdout.decode("utf-8"))
+            stats = json.loads(p.stdout.decode("utf-8"))
+            return Result(
+                self.name,
+                lang_name,
+                phase,
+                stats["time"],
+                stats["memory"],
+                stats["stdout"],
+            )
         except subprocess.CalledProcessError as e:
-            raise RuntimeError(e.stderr.decode("utf-8"))
+            print(e.stderr.decode("utf-8"), file=sys.stderr)
+            return None
 
     def run(self) -> Iterable[Result]:
-        for lang in self.languages:
+        for lang in self.languages():
+            if lang.name in self.skip:
+                continue
+
             if lang.compile:
-                stats = self.measure(lang.compile)
-                yield Result(
-                    self.name, lang.name, "compile", stats["time"], stats["memory"]
-                )
+                if result := self.measure("compile", lang.name, lang.compile):
+                    yield result
 
             for _ in range(self.repeats):
-                stats = self.measure(lang.run)
-                yield Result(
-                    self.name, lang.name, "run", stats["time"], stats["memory"]
-                )
+                if result := self.measure("run", lang.name, lang.run):
+                    assert result.output == self.result, "\n".join(
+                        [
+                            f"Incorrect result on {lang.name} {self.name}:",
+                            result.output,
+                            f"---=== Expected ===---",
+                            f"{self.result}",
+                        ]
+                    )
+                    yield result
 
             for filename in lang.cleanup:
-                os.remove(os.path.join("src", self.name, filename))
-
-
-def c(args: List[str] = []) -> Language:
-    return Language(
-        name="C",
-        compile=["gcc", "-O3", "main.c"],
-        run=["./a.out", *args],
-        cleanup=["a.out"],
-    )
-
-
-def go(args: List[str] = []) -> Language:
-    return Language(
-        name="Go",
-        compile=["go", "build", "main.go"],
-        run=["./main", *args],
-        cleanup=["main"],
-    )
-
-
-def haskell(args: List[str] = []) -> Language:
-    return Language(
-        name="Haskell",
-        compile=["ghc", "main.hs", "-O3"],
-        run=["./main", *args],
-        cleanup=["main", "main.hi", "main.o"],
-    )
-
-
-def java(args: List[str] = []) -> Language:
-    return Language(
-        name="Java",
-        compile=["javac", "Main.java"],
-        run=["java", "Main", *args],
-        cleanup=["Main.class"],
-    )
-
-
-def python(args: List[str] = []) -> Language:
-    return Language("Python", ["python", "main.py", *args])
-
-
-def ruby(args: List[str] = []) -> Language:
-    return Language("Ruby", ["ruby", "main.rb", *args])
+                try:
+                    os.remove(os.path.join("src", self.name, filename))
+                except Exception as e:
+                    print(e, file=sys.stderr)

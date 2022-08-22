@@ -16,5 +16,9 @@ You must have the following languages installed.
 ## Run the benchmarks
 
 ```sh
+# To see the results in the terminal.
 python run.py
+
+# To save the results as a CSV file.
+python run.py --format=csv > results.csv
 ```

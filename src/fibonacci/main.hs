@@ -1,6 +1,12 @@
+import System.Environment (getArgs)
+
 fib :: Int -> Int
-fib n | n <= 1 = 0
+fib 0 = 0
+fib 1 = 1
 fib n = fib (n - 1) + fib (n - 2)
 
 main :: IO ()
-main = print (fib 36)
+main = do
+  (arg : _) <- getArgs
+  let n = read arg :: Int
+  print (fib n)

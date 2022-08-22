@@ -5,16 +5,8 @@ import benchmark as bm
 
 
 benchmarks = [
-    bm.Benchmark(
-        name="hello-world",
-        repeats=10,
-        languages=[bm.c(), bm.go(), bm.haskell(), bm.java(), bm.python()],
-    ),
-    bm.Benchmark(
-        name="fibonacci",
-        repeats=10,
-        languages=[bm.c(), bm.go(), bm.haskell(), bm.java(), bm.python()],
-    ),
+    bm.Benchmark("hello-world", ["Hi! 🎉"], result="Hi! 🎉"),
+    bm.Benchmark("fibonacci", ["20"], result="6765"),
 ]
 
 

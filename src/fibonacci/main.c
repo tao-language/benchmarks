@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 long fib(long n) {
   if (n <= 1)
@@ -6,7 +7,8 @@ long fib(long n) {
   return fib(n - 1) + fib(n - 2);
 }
 
-int main() {
-  printf("%ld", fib(36));
+int main(int argc, char** argv) {
+  long n = atol(argv[1]);
+  printf("%ld\n", fib(n));
   return 0;
 }
