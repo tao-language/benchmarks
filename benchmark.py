@@ -1,5 +1,5 @@
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import json
 import os
 from typing import Dict, List, Optional
@@ -9,6 +9,7 @@ from typing import Dict, List, Optional
 class Benchmark:
     run: List[str]
     compile: Optional[List[str]] = None
+    cleanup: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -22,8 +23,27 @@ class Stats:
 class Results:
     compile_time: float
     compile_memory: float
+    # TODO: compiled file size
     run_time: Stats
     run_memory: Stats
+
+
+def haskell(source: str, args: List[str] = []) -> Benchmark:
+    (name, _) = os.path.splitext(source)
+    return Benchmark(
+        compile=["ghc", source],
+        run=["./" + name, *args],
+        cleanup=[name, name + ".hi", name + ".o"],
+    )
+
+
+def java(source: str, args: List[str] = []) -> Benchmark:
+    (mainClass, _) = os.path.splitext(source)
+    return Benchmark(
+        compile=["javac", source],
+        run=["java", mainClass, *args],
+        cleanup=[mainClass + ".class"],
+    )
 
 
 def python(source: str, args: List[str] = []) -> Benchmark:
@@ -34,14 +54,6 @@ def ruby(source: str, args: List[str] = []) -> Benchmark:
     return Benchmark(["ruby", source, *args])
 
 
-def java(source: str, args: List[str] = []) -> Benchmark:
-    (mainClass, _) = os.path.splitext(source)
-    return Benchmark(
-        compile=["javac", source],
-        run=["java", mainClass, *args],
-    )
-
-
 def get_stats(xs: List[float]) -> Stats:
     return Stats(min=min(xs), max=max(xs), avg=sum(xs) / len(xs))
 
@@ -49,7 +61,7 @@ def get_stats(xs: List[float]) -> Stats:
 def measure(cmd: List[str]) -> Dict[str, float]:
     try:
         p = subprocess.run(
-            ["python", "measure.py", "--dir=src/", *cmd],
+            ["python", "measure.py", "src/", *cmd],
             capture_output=True,
             check=True,
         )
@@ -61,6 +73,9 @@ def measure(cmd: List[str]) -> Dict[str, float]:
 def get_results(benchmark: Benchmark, repeats: int) -> Results:
     compile_results = measure(benchmark.compile) if benchmark.compile else {}
     runs_results = [measure(benchmark.run) for _ in range(repeats)]
+    for filename in benchmark.cleanup:
+        os.remove(os.path.join("src", filename))
+
     return Results(
         compile_time=compile_results.get("time"),
         compile_memory=compile_results.get("memory"),

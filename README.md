@@ -1,11 +1,18 @@
-# benchmarks
+# Benchmarks
 
-Benchmarks on different programming languages
+Benchmarks on different programming languages.
 
-We must give sudo access to the energy registers for RAPL to access.
+## Before you begin
+
+You must have the following languages installed.
+
+- [Haskell](https://www.haskell.org/ghcup/)
+- [Java](https://sdkman.io/jdks)
+- [Python](https://www.python.org/downloads/)
+- [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+
+## Run the benchmarks
 
 ```sh
-sudo modprobe msr
+python run.py
 ```
-
-https://github.com/greensoftwarelab/Energy-Languages

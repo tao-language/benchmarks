@@ -2,6 +2,7 @@ import json
 import os
 import resource
 import subprocess
+import sys
 from typing import Dict, List
 
 
@@ -24,13 +25,12 @@ def measure(cmd: str, args: List[str], directory: str = ".") -> Dict[str, float]
 
 
 if __name__ == "__main__":
-    import argparse
+    if len(sys.argv) < 3:
+        raise ValueError("usage: measure.py directory command arguments..")
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("cmd")
-    parser.add_argument("args", nargs="*")
-    parser.add_argument("--dir", default=".")
-    args = parser.parse_args()
+    directory = sys.argv[1]
+    command = sys.argv[2]
+    args = sys.argv[3:]
 
-    results = measure(args.cmd, args.args, args.dir)
+    results = measure(command, args, directory)
     print(json.dumps(results))
