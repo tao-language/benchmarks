@@ -3,14 +3,14 @@ import sys
 from typing import Iterable, List
 import benchmark as bm
 
-with open("src/mandelbrot/result-2000-600.txt") as f:
+with open("src/mandelbrot-vec/result-2000-600.txt") as f:
     mandelbrot_result = f.read()
 
 benchmarks = [
     bm.Benchmark("hello-world", ["Hi! 😊"], result="Hi! 😊"),
     bm.Benchmark("fibonacci", ["20"], result="6765"),
     bm.Benchmark("fibonacci", ["30"], result="832040"),
-    # bm.Benchmark("mandelbrot", ["2000", "600"], result=mandelbrot_result),
+    # bm.Benchmark("mandelbrot-vec", ["2000", "600"], result=mandelbrot_result),
 ]
 
 
